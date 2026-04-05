@@ -83,12 +83,12 @@ function connectorIcon(type, subtype, end = {}) {
         <circle cx="16" cy="16" r="14" fill="#444" stroke="#666" stroke-width="1"/>
         <!-- inner face -->
         <circle cx="16" cy="16" r="11" fill="#333"/>
-        <!-- 5 pins in horseshoe arc (open at bottom) -->
-        <circle cx="16" cy="7"  r="2" fill="#bbb"/>
-        <circle cx="24" cy="11" r="2" fill="#bbb"/>
-        <circle cx="22" cy="22" r="2" fill="#bbb"/>
-        <circle cx="10" cy="22" r="2" fill="#bbb"/>
-        <circle cx="8"  cy="11" r="2" fill="#bbb"/>
+        <!-- 5 pins across top half in arc -->
+        <circle cx="9"  cy="12" r="2" fill="#bbb"/>
+        <circle cx="12" cy="9"  r="2" fill="#bbb"/>
+        <circle cx="16" cy="8"  r="2" fill="#bbb"/>
+        <circle cx="20" cy="9"  r="2" fill="#bbb"/>
+        <circle cx="23" cy="12" r="2" fill="#bbb"/>
       </svg>`;
     }
     case 'USB-C': {
