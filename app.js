@@ -135,10 +135,10 @@ function connectorLabel(end) {
 }
 
 function connectorDisplay(end) {
-  // For XLR, pass gender as subtype so icon knows male vs female
   const iconSubtype = end.type === 'XLR' ? end.gender : end.subtype;
   const icon = connectorIcon(end.type, iconSubtype);
-  return `<span class="connector-display" title="${connectorLabel(end)}">${icon}${colorDots(end.colors)}</span>`;
+  const label = connectorLabel(end);
+  return `<span class="connector-display"><span class="connector-icon">${icon}${colorDots(end.colors)}</span><span class="connector-name">${label}</span></span>`;
 }
 
 function colorDots(colors) {
