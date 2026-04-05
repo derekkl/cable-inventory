@@ -2,7 +2,7 @@
 
 // --- Connector Icons (side profile SVGs) ---
 
-function connectorIcon(type, subtype) {
+function connectorIcon(type, subtype, end = {}) {
   const s = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 32" width="60" height="24"`;
 
   switch (type) {
@@ -28,13 +28,33 @@ function connectorIcon(type, subtype) {
         <ellipse cx="5" cy="16" rx="4" ry="5" fill="#bbb"/>
       </svg>`;
     }
-    case 'RCA':
+    case 'RCA': {
+      const colors = end.colors || ['grey'];
+      if (end.pairing === 'pair') {
+        // Stacked pair — two RCA plugs, each colored
+        const p = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 64" width="60" height="48"`;
+        const rcaPlug = (y, color) => {
+          const fill = COLOR_MAP[color] || '#888';
+          return `
+            <rect x="30" y="${y+4}" width="46" height="16" rx="4" fill="${fill}" opacity="0.85"/>
+            <rect x="22" y="${y+7}" width="12" height="10" rx="2" fill="#777"/>
+            <rect x="4"  y="${y+11}" width="34" height="2" fill="#bbb"/>
+            <circle cx="4" cy="${y+12}" r="2.5" fill="#ccc"/>`;
+        };
+        return `<svg ${p}>
+          ${rcaPlug(0,  colors[0] || 'grey')}
+          ${rcaPlug(32, colors[1] || 'grey')}
+        </svg>`;
+      }
+      // Single RCA
+      const fill = COLOR_MAP[colors[0]] || '#888';
       return `<svg ${s}>
-        <rect x="30" y="8" width="46" height="16" rx="4" fill="#555"/>
+        <rect x="30" y="8" width="46" height="16" rx="4" fill="${fill}" opacity="0.85"/>
         <rect x="22" y="11" width="12" height="10" rx="2" fill="#777"/>
         <rect x="4" y="15" width="34" height="2" fill="#bbb"/>
         <circle cx="4" cy="16" r="2.5" fill="#ccc"/>
       </svg>`;
+    }
     case 'XLR': {
       // Face-on (top-down) view — circular shell, keyway, 3-pin triangle
       const f = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"`;
@@ -146,7 +166,7 @@ function connectorLabel(end) {
 
 function connectorDisplay(end) {
   const iconSubtype = end.type === 'XLR' ? end.gender : end.subtype;
-  const icon = connectorIcon(end.type, iconSubtype);
+  const icon = connectorIcon(end.type, iconSubtype, end);
   const label = connectorLabel(end);
   return `<span class="connector-display"><span class="connector-icon">${icon}${colorDots(end.colors)}</span><span class="connector-name">${label}</span></span>`;
 }
