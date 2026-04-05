@@ -1,5 +1,82 @@
 'use strict';
 
+// --- Connector Icons (side profile SVGs) ---
+
+function connectorIcon(type, subtype) {
+  const s = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 32" width="60" height="24"`;
+
+  switch (type) {
+    case '3.5mm': {
+      const rings = subtype === 'TRS'
+        ? `<rect x="22" y="13" width="5" height="6" fill="#111"/><rect x="39" y="13" width="5" height="6" fill="#111"/>`
+        : `<rect x="30" y="13" width="5" height="6" fill="#111"/>`;
+      return `<svg ${s}>
+        <rect x="50" y="7" width="27" height="18" rx="5" fill="#555"/>
+        <rect x="5" y="13" width="48" height="6" fill="#aaa"/>
+        ${rings}
+        <ellipse cx="5" cy="16" rx="4" ry="3" fill="#bbb"/>
+      </svg>`;
+    }
+    case '1/4"': {
+      const rings = subtype === 'TRS'
+        ? `<rect x="20" y="11" width="5" height="10" fill="#111"/><rect x="37" y="11" width="5" height="10" fill="#111"/>`
+        : `<rect x="28" y="11" width="5" height="10" fill="#111"/>`;
+      return `<svg ${s}>
+        <rect x="48" y="5" width="29" height="22" rx="5" fill="#555"/>
+        <rect x="5" y="11" width="46" height="10" fill="#aaa"/>
+        ${rings}
+        <ellipse cx="5" cy="16" rx="4" ry="5" fill="#bbb"/>
+      </svg>`;
+    }
+    case 'RCA':
+      return `<svg ${s}>
+        <rect x="30" y="8" width="46" height="16" rx="4" fill="#555"/>
+        <rect x="22" y="11" width="12" height="10" rx="2" fill="#777"/>
+        <rect x="4" y="15" width="34" height="2" fill="#bbb"/>
+        <circle cx="4" cy="16" r="2.5" fill="#ccc"/>
+      </svg>`;
+    case 'XLR':
+      return subtype === 'female'
+        ? `<svg ${s}>
+            <rect x="4" y="4" width="58" height="24" rx="6" fill="#555"/>
+            <rect x="56" y="8" width="8" height="16" rx="2" fill="#333"/>
+            <circle cx="60" cy="12" r="2" fill="#111"/>
+            <circle cx="60" cy="20" r="2" fill="#111"/>
+            <circle cx="57" cy="16" r="2" fill="#111"/>
+            <rect x="28" y="2" width="14" height="4" rx="2" fill="#444"/>
+          </svg>`
+        : `<svg ${s}>
+            <rect x="18" y="4" width="58" height="24" rx="6" fill="#555"/>
+            <rect x="8" y="8" width="14" height="16" rx="3" fill="#777"/>
+            <circle cx="12" cy="12" r="2" fill="#aaa"/>
+            <circle cx="12" cy="20" r="2" fill="#aaa"/>
+            <circle cx="17" cy="16" r="2" fill="#aaa"/>
+            <rect x="30" y="2" width="14" height="4" rx="2" fill="#444"/>
+          </svg>`;
+    case 'MIDI DIN':
+      return `<svg ${s}>
+        <rect x="14" y="3" width="62" height="26" rx="6" fill="#555"/>
+        <rect x="6" y="7" width="12" height="18" rx="3" fill="#777"/>
+        <circle cx="10" cy="11" r="1.8" fill="#aaa"/>
+        <circle cx="10" cy="21" r="1.8" fill="#aaa"/>
+        <circle cx="7"  cy="16" r="1.8" fill="#aaa"/>
+        <circle cx="14" cy="13" r="1.8" fill="#aaa"/>
+        <circle cx="14" cy="19" r="1.8" fill="#aaa"/>
+      </svg>`;
+    case 'USB-C':
+      return `<svg ${s}>
+        <rect x="20" y="8" width="56" height="16" rx="3" fill="#555"/>
+        <rect x="4" y="12" width="20" height="8" rx="4" fill="#aaa"/>
+        <rect x="22" y="10" width="4" height="12" fill="#444"/>
+      </svg>`;
+    default:
+      return `<svg ${s}>
+        <rect x="10" y="10" width="60" height="12" rx="4" fill="#555"/>
+        <text x="40" y="20" text-anchor="middle" font-size="8" fill="#aaa">${type}</text>
+      </svg>`;
+  }
+}
+
 const COLOR_MAP = {
   red: '#e94560', white: '#f0f0f0', black: '#444', blue: '#4a90e2',
   green: '#7ed321', yellow: '#f8e71c', grey: '#888', gray: '#888',
@@ -57,6 +134,13 @@ function connectorLabel(end) {
   return label;
 }
 
+function connectorDisplay(end) {
+  // For XLR, pass gender as subtype so icon knows male vs female
+  const iconSubtype = end.type === 'XLR' ? end.gender : end.subtype;
+  const icon = connectorIcon(end.type, iconSubtype);
+  return `<span class="connector-display" title="${connectorLabel(end)}">${icon}${colorDots(end.colors)}</span>`;
+}
+
 function colorDots(colors) {
   if (!colors || colors.length === 0) return '';
   return `<span class="color-dots">${colors.map(c =>
@@ -91,8 +175,8 @@ function renderList(filtered) {
   }
 
   el.innerHTML = filtered.map(c => {
-    const endA = connectorLabel(c.end_a) + colorDots(c.end_a.colors);
-    const endB = connectorLabel(c.end_b) + colorDots(c.end_b.colors);
+    const endA = connectorDisplay(c.end_a);
+    const endB = connectorDisplay(c.end_b);
     const length = c.length ? `${c.length} ${c.length_unit}` : '';
 
     return `

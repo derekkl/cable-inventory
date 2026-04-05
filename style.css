@@ -184,6 +184,19 @@ h1 {
 
 .cable-actions button:hover { border-color: #e94560; color: #e94560; }
 
+/* Connector display */
+.connector-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  vertical-align: middle;
+}
+
+.connector-display svg {
+  display: block;
+  opacity: 0.9;
+}
+
 /* Color dots */
 .color-dots { display: inline-flex; gap: 3px; vertical-align: middle; }
 .color-dot {
