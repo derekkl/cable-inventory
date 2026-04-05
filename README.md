@@ -6,7 +6,7 @@ Audio cable inventory app — identify, catalog, and manage your cable collectio
 
 ## Features
 
-- Inventory of cables with connector type, signal type, condition, quantity
+- Inventory of cables with connector type, signal type, quantity
 - Search and filter by signal type
 - Add, edit, delete cables
 - Data persisted in browser localStorage (seeded from `data/cables.json`)

@@ -63,7 +63,6 @@ function connectorIcon(type, subtype, end = {}) {
     }
     case 'XLR': {
       // Face-on (top-down) view — circular shell, keyway, 3-pin triangle
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       const pinFill = subtype === 'female' ? '#111' : '#bbb';
       const pinStroke = subtype === 'female' ? '#555' : 'none';
       return `<svg ${f}>
@@ -211,6 +210,34 @@ const CATEGORY_SIGNALS = {
   video: ['HDMI', 'DisplayPort', 'component video', 'composite video', 'S-Video', 'VGA'],
   usb:   ['USB data', 'USB power'],
 };
+
+// Connector types that use a subtype selector
+const SUBTYPE_TYPES  = new Set(['3.5mm', '1/4"', 'MIDI DIN']);
+const PAIRABLE_TYPES = new Set(['RCA']);
+const USB_TYPES      = new Set(['USB-A', 'USB-B', 'USB-Mini', 'USB-Micro', 'USB-C']);
+
+// Direct connector → signal mapping for unambiguous cases.
+// Omitted types (3.5mm, 1/4", RCA, DVI, Thunderbolt, USB-C) require user selection.
+const CONNECTOR_TO_SIGNAL = {
+  'XLR':              'balanced audio',
+  'MIDI DIN':         'MIDI',
+  'HDMI':             'HDMI',
+  'DisplayPort':      'DisplayPort',
+  'Mini DisplayPort': 'DisplayPort',
+  'VGA':              'VGA',
+  'S-Video':          'S-Video',
+  'USB-A':            'USB data',
+  'USB-B':            'USB data',
+  'USB-Mini':         'USB data',
+  'USB-Micro':        'USB data',
+};
+
+function inferSignal(typeA, typeB) {
+  const sigA = CONNECTOR_TO_SIGNAL[typeA];
+  const sigB = CONNECTOR_TO_SIGNAL[typeB];
+  if (!sigA || !sigB || sigA !== sigB) return null;
+  return sigA;
+}
 
 let cables = [];
 let editingId = null;
@@ -366,6 +393,43 @@ function render() {
 
 // --- Modal ---
 
+function updateFormDynamics(form) {
+  const typeA = form.end_a_type.value;
+  const typeB = form.end_b_type.value;
+
+  // Subtype visibility
+  const showSubA = SUBTYPE_TYPES.has(typeA);
+  const showSubB = SUBTYPE_TYPES.has(typeB);
+  form.end_a_subtype.closest('.form-group').style.display = showSubA ? '' : 'none';
+  form.end_b_subtype.closest('.form-group').style.display = showSubB ? '' : 'none';
+  if (!showSubA) form.end_a_subtype.value = '';
+  if (!showSubB) form.end_b_subtype.value = '';
+
+  // Pairing visibility — only meaningful for RCA
+  const showPairA = PAIRABLE_TYPES.has(typeA);
+  const showPairB = PAIRABLE_TYPES.has(typeB);
+  form.end_a_pairing.closest('.form-group').style.display = showPairA ? '' : 'none';
+  form.end_b_pairing.closest('.form-group').style.display = showPairB ? '' : 'none';
+  if (!showPairA) form.end_a_pairing.value = 'single';
+  if (!showPairB) form.end_b_pairing.value = 'single';
+
+  // End colors — hide for USB (cable_color covers the whole cable; end colors aren't meaningful)
+  const showColorsA = !USB_TYPES.has(typeA);
+  const showColorsB = !USB_TYPES.has(typeB);
+  form.end_a_colors.closest('.form-group').style.display = showColorsA ? '' : 'none';
+  form.end_b_colors.closest('.form-group').style.display = showColorsB ? '' : 'none';
+
+  // Signal type inference
+  const inferred = inferSignal(typeA, typeB);
+  const signalGroup = form.signal_type.closest('.form-group');
+  if (inferred) {
+    form.signal_type.value = inferred;
+    signalGroup.style.display = 'none';
+  } else {
+    signalGroup.style.display = '';
+  }
+}
+
 function openModal(cable = null) {
   editingId = cable ? cable.id : null;
   document.getElementById('modal-title').textContent = cable ? 'Edit Cable' : 'Add Cable';
@@ -385,7 +449,6 @@ function openModal(cable = null) {
     form.end_b_colors.value  = (cable.end_b.colors || []).join(', ');
     form.signal_type.value   = cable.signal_type || 'stereo audio';
     form.quantity.value      = cable.quantity || 1;
-    form.condition.value     = cable.condition || 'unknown';
     form.length.value        = cable.length || '';
     form.length_unit.value   = cable.length_unit || '';
     form.brand.value         = cable.brand || '';
@@ -394,6 +457,7 @@ function openModal(cable = null) {
     form.is_adapter.value    = cable.is_adapter ? 'true' : 'false';
   }
 
+  updateFormDynamics(form);
   document.getElementById('modal').style.display = 'flex';
 }
 
@@ -429,7 +493,6 @@ document.getElementById('cable-form').addEventListener('submit', e => {
     },
     signal_type:  form.signal_type.value,
     quantity:     parseInt(form.quantity.value) || 1,
-    condition:    form.condition.value,
     length:       form.length.value ? parseFloat(form.length.value) : null,
     length_unit:  form.length_unit.value || null,
     brand:        form.brand.value.trim() || null,
@@ -478,6 +541,7 @@ function dragDrop(e, targetId) {
   const srcIdx = cables.findIndex(c => c.id === dragSrcId);
   const tgtIdx = cables.findIndex(c => c.id === targetId);
   cables.splice(tgtIdx, 0, cables.splice(srcIdx, 1)[0]);
+  dragSrcId = null;
   save();
   render();
 }
@@ -509,6 +573,10 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 document.getElementById('btn-add').addEventListener('click', () => openModal());
 document.getElementById('btn-cancel').addEventListener('click', closeModal);
+
+const _form = document.getElementById('cable-form');
+_form.end_a_type.addEventListener('change', () => updateFormDynamics(_form));
+_form.end_b_type.addEventListener('change', () => updateFormDynamics(_form));
 document.getElementById('search').addEventListener('input', render);
 document.getElementById('filter-signal').addEventListener('change', render);
 
