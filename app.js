@@ -35,34 +35,44 @@ function connectorIcon(type, subtype) {
         <rect x="4" y="15" width="34" height="2" fill="#bbb"/>
         <circle cx="4" cy="16" r="2.5" fill="#ccc"/>
       </svg>`;
-    case 'XLR':
-      return subtype === 'female'
-        ? `<svg ${s}>
-            <rect x="4" y="4" width="58" height="24" rx="6" fill="#555"/>
-            <rect x="56" y="8" width="8" height="16" rx="2" fill="#333"/>
-            <circle cx="60" cy="12" r="2" fill="#111"/>
-            <circle cx="60" cy="20" r="2" fill="#111"/>
-            <circle cx="57" cy="16" r="2" fill="#111"/>
-            <rect x="28" y="2" width="14" height="4" rx="2" fill="#444"/>
-          </svg>`
-        : `<svg ${s}>
-            <rect x="18" y="4" width="58" height="24" rx="6" fill="#555"/>
-            <rect x="8" y="8" width="14" height="16" rx="3" fill="#777"/>
-            <circle cx="12" cy="12" r="2" fill="#aaa"/>
-            <circle cx="12" cy="20" r="2" fill="#aaa"/>
-            <circle cx="17" cy="16" r="2" fill="#aaa"/>
-            <rect x="30" y="2" width="14" height="4" rx="2" fill="#444"/>
-          </svg>`;
-    case 'MIDI DIN':
-      return `<svg ${s}>
-        <rect x="14" y="3" width="62" height="26" rx="6" fill="#555"/>
-        <rect x="6" y="7" width="12" height="18" rx="3" fill="#777"/>
-        <circle cx="10" cy="11" r="1.8" fill="#aaa"/>
-        <circle cx="10" cy="21" r="1.8" fill="#aaa"/>
-        <circle cx="7"  cy="16" r="1.8" fill="#aaa"/>
-        <circle cx="14" cy="13" r="1.8" fill="#aaa"/>
-        <circle cx="14" cy="19" r="1.8" fill="#aaa"/>
+    case 'XLR': {
+      // Face-on (top-down) view — circular shell, keyway, 3-pin triangle
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"`;
+      const pinFill = subtype === 'female' ? '#111' : '#bbb';
+      const pinStroke = subtype === 'female' ? '#555' : 'none';
+      return `<svg ${f}>
+        <!-- outer shell -->
+        <circle cx="16" cy="16" r="14" fill="#444" stroke="#666" stroke-width="1"/>
+        <!-- inner face -->
+        <circle cx="16" cy="16" r="11" fill="#333"/>
+        <!-- keyway notch at top -->
+        <rect x="13" y="2" width="6" height="5" rx="1" fill="#444"/>
+        <!-- pin 1 (top center) -->
+        <circle cx="16" cy="9"  r="2.5" fill="${pinFill}" stroke="${pinStroke}" stroke-width="0.5"/>
+        <!-- pin 2 (bottom left) -->
+        <circle cx="10" cy="21" r="2.5" fill="${pinFill}" stroke="${pinStroke}" stroke-width="0.5"/>
+        <!-- pin 3 (bottom right) -->
+        <circle cx="22" cy="21" r="2.5" fill="${pinFill}" stroke="${pinStroke}" stroke-width="0.5"/>
+        <!-- male/female indicator text -->
+        <text x="16" y="17" text-anchor="middle" font-size="5" fill="#888" font-family="monospace">${subtype === 'female' ? 'F' : 'M'}</text>
       </svg>`;
+    }
+    case 'MIDI DIN': {
+      // Face-on (top-down) view — D-shaped housing, 5-pin horseshoe arc
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"`;
+      return `<svg ${f}>
+        <!-- outer D-shaped housing -->
+        <path d="M4 16 A12 12 0 1 1 28 16 L28 28 A2 2 0 0 1 26 30 L6 30 A2 2 0 0 1 4 28 Z" fill="#444" stroke="#666" stroke-width="1"/>
+        <!-- inner face -->
+        <path d="M7 16 A9 9 0 1 1 25 16 L25 27 L7 27 Z" fill="#333"/>
+        <!-- 5 pins in horseshoe: top-left, top-right, mid-left, mid-right, bottom-center -->
+        <circle cx="10" cy="12" r="2" fill="#bbb"/>
+        <circle cx="22" cy="12" r="2" fill="#bbb"/>
+        <circle cx="8"  cy="19" r="2" fill="#bbb"/>
+        <circle cx="24" cy="19" r="2" fill="#bbb"/>
+        <circle cx="16" cy="10" r="2" fill="#bbb"/>
+      </svg>`;
+    }
     case 'USB-C':
       return `<svg ${s}>
         <rect x="20" y="8" width="56" height="16" rx="3" fill="#555"/>
