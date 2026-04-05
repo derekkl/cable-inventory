@@ -1,86 +1,287 @@
 [
   {
-    "id": 1,
-    "end_a": { "type": "RCA", "subtype": null, "gender": "male", "pairing": "pair", "colors": ["red", "white"] },
-    "end_b": { "type": "3.5mm", "subtype": "TRS", "gender": "male", "pairing": "single", "colors": ["black"] },
-    "signal_type": "stereo audio",
-    "length": null,
-    "length_unit": null,
-    "quantity": 2,
-    "condition": "unknown",
-    "brand": null,
-    "notes": "Black jack",
-    "is_adapter": false
-  },
-  {
-    "id": 2,
-    "end_a": { "type": "RCA", "subtype": null, "gender": "male", "pairing": "pair", "colors": ["red", "white"] },
-    "end_b": { "type": "3.5mm", "subtype": "TRS", "gender": "male", "pairing": "single", "colors": ["green"] },
-    "signal_type": "stereo audio",
-    "length": null,
-    "length_unit": null,
-    "quantity": 1,
-    "condition": "unknown",
-    "brand": null,
-    "notes": "Green jack, likely PC line-out era",
-    "is_adapter": false
-  },
-  {
     "id": 3,
-    "end_a": { "type": "RCA", "subtype": null, "gender": "male", "pairing": "pair", "colors": ["red", "white"] },
-    "end_b": { "type": "3.5mm", "subtype": "TRS", "gender": "male", "pairing": "single", "colors": ["white"] },
+    "end_a": {
+      "type": "RCA",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "pair",
+      "colors": [
+        "red",
+        "white"
+      ]
+    },
+    "end_b": {
+      "type": "3.5mm",
+      "subtype": "TRS",
+      "gender": "male",
+      "pairing": "single",
+      "colors": [
+        "white"
+      ]
+    },
     "signal_type": "stereo audio",
-    "length": null,
-    "length_unit": null,
     "quantity": 1,
     "condition": "unknown",
+    "length": 3,
+    "length_unit": "ft",
     "brand": null,
+    "cable_color": "white",
     "notes": "White jack",
     "is_adapter": false
   },
   {
-    "id": 4,
-    "end_a": { "type": "RCA", "subtype": null, "gender": "male", "pairing": "single", "colors": ["grey"] },
-    "end_b": { "type": "RCA", "subtype": null, "gender": "male", "pairing": "single", "colors": ["grey"] },
-    "signal_type": "mono audio",
-    "length": null,
-    "length_unit": null,
+    "id": 2,
+    "end_a": {
+      "type": "RCA",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "pair",
+      "colors": [
+        "red",
+        "white"
+      ]
+    },
+    "end_b": {
+      "type": "3.5mm",
+      "subtype": "TRS",
+      "gender": "male",
+      "pairing": "single",
+      "colors": [
+        "green"
+      ]
+    },
+    "signal_type": "stereo audio",
     "quantity": 1,
     "condition": "unknown",
+    "length": 4,
+    "length_unit": "ft",
     "brand": null,
+    "cable_color": null,
+    "notes": "Green jack, likely PC line-out era",
+    "is_adapter": false
+  },
+  {
+    "id": 1,
+    "end_a": {
+      "type": "RCA",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "pair",
+      "colors": [
+        "red",
+        "white"
+      ]
+    },
+    "end_b": {
+      "type": "3.5mm",
+      "subtype": "TRS",
+      "gender": "male",
+      "pairing": "single",
+      "colors": [
+        "black"
+      ]
+    },
+    "signal_type": "stereo audio",
+    "quantity": 2,
+    "condition": "unknown",
+    "length": 6,
+    "length_unit": "ft",
+    "brand": null,
+    "cable_color": null,
+    "notes": "Black jack",
+    "is_adapter": false
+  },
+  {
+    "id": 9,
+    "end_a": {
+      "type": "RCA",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "pair",
+      "colors": [
+        "red",
+        "blue"
+      ]
+    },
+    "end_b": {
+      "type": "RCA",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "pair",
+      "colors": [
+        "red",
+        "blue"
+      ]
+    },
+    "signal_type": "stereo audio",
+    "quantity": 1,
+    "condition": "unknown",
+    "length": 3,
+    "length_unit": "ft",
+    "brand": "Monster",
+    "cable_color": null,
+    "notes": "Red and blue pair",
+    "is_adapter": false
+  },
+  {
+    "id": 4,
+    "end_a": {
+      "type": "RCA",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "single",
+      "colors": [
+        "grey"
+      ]
+    },
+    "end_b": {
+      "type": "RCA",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "single",
+      "colors": [
+        "grey"
+      ]
+    },
+    "signal_type": "mono audio",
+    "quantity": 1,
+    "condition": "unknown",
+    "length": 6,
+    "length_unit": "ft",
+    "brand": null,
+    "cable_color": null,
     "notes": "Grey, possibly subwoofer LFE",
     "is_adapter": false
   },
   {
     "id": 5,
-    "end_a": { "type": "RCA", "subtype": null, "gender": "male", "pairing": "single", "colors": ["yellow"] },
-    "end_b": { "type": "RCA", "subtype": null, "gender": "male", "pairing": "single", "colors": ["yellow"] },
+    "end_a": {
+      "type": "RCA",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "single",
+      "colors": [
+        "yellow"
+      ]
+    },
+    "end_b": {
+      "type": "RCA",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "single",
+      "colors": [
+        "yellow"
+      ]
+    },
     "signal_type": "composite video",
-    "length": null,
-    "length_unit": null,
     "quantity": 1,
     "condition": "unknown",
+    "length": 6,
+    "length_unit": "ft",
     "brand": null,
+    "cable_color": null,
     "notes": "Yellow, likely composite video",
     "is_adapter": false
   },
   {
     "id": 6,
-    "end_a": { "type": "3.5mm", "subtype": "TRS", "gender": "male", "pairing": "single", "colors": ["grey"] },
-    "end_b": { "type": "1/4\"", "subtype": "TRS", "gender": "male", "pairing": "single", "colors": ["grey"] },
+    "end_a": {
+      "type": "3.5mm",
+      "subtype": "TRS",
+      "gender": "male",
+      "pairing": "single",
+      "colors": [
+        "grey"
+      ]
+    },
+    "end_b": {
+      "type": "1/4\"",
+      "subtype": "TRS",
+      "gender": "male",
+      "pairing": "single",
+      "colors": [
+        "grey"
+      ]
+    },
     "signal_type": "stereo audio",
-    "length": null,
-    "length_unit": null,
     "quantity": 1,
     "condition": "unknown",
+    "length": 10,
+    "length_unit": "ft",
     "brand": null,
+    "cable_color": null,
     "notes": "Grey, headphone/line adapter",
     "is_adapter": false
   },
   {
+    "id": 8,
+    "end_a": {
+      "type": "XLR",
+      "subtype": null,
+      "gender": "female",
+      "pairing": "single",
+      "colors": null
+    },
+    "end_b": {
+      "type": "XLR",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "signal_type": "balanced audio",
+    "quantity": 1,
+    "condition": "unknown",
+    "length": 6,
+    "length_unit": "ft",
+    "brand": null,
+    "cable_color": null,
+    "notes": "Mic extension cable",
+    "is_adapter": false
+  },
+  {
+    "id": 12,
+    "end_a": {
+      "type": "MIDI DIN",
+      "subtype": "5-pin",
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "end_b": {
+      "type": "MIDI DIN",
+      "subtype": "5-pin",
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "signal_type": "MIDI",
+    "quantity": 1,
+    "condition": "unknown",
+    "length": 6,
+    "length_unit": "ft",
+    "brand": null,
+    "cable_color": null,
+    "notes": null,
+    "is_adapter": false
+  },
+  {
     "id": 7,
-    "end_a": { "type": "3.5mm", "subtype": "TRS", "gender": "male", "pairing": "single", "colors": null },
-    "end_b": { "type": "XLR", "subtype": null, "gender": "female", "pairing": "single", "colors": null },
+    "end_a": {
+      "type": "3.5mm",
+      "subtype": "TRS",
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "end_b": {
+      "type": "XLR",
+      "subtype": null,
+      "gender": "female",
+      "pairing": "single",
+      "colors": null
+    },
     "signal_type": "stereo audio",
     "length": null,
     "length_unit": null,
@@ -91,35 +292,21 @@
     "is_adapter": false
   },
   {
-    "id": 8,
-    "end_a": { "type": "XLR", "subtype": null, "gender": "female", "pairing": "single", "colors": null },
-    "end_b": { "type": "XLR", "subtype": null, "gender": "male", "pairing": "single", "colors": null },
-    "signal_type": "balanced audio",
-    "length": null,
-    "length_unit": null,
-    "quantity": 1,
-    "condition": "unknown",
-    "brand": null,
-    "notes": "Mic extension cable",
-    "is_adapter": false
-  },
-  {
-    "id": 9,
-    "end_a": { "type": "RCA", "subtype": null, "gender": "male", "pairing": "pair", "colors": ["red", "blue"] },
-    "end_b": { "type": "RCA", "subtype": null, "gender": "male", "pairing": "pair", "colors": ["red", "blue"] },
-    "signal_type": "stereo audio",
-    "length": null,
-    "length_unit": null,
-    "quantity": 1,
-    "condition": "unknown",
-    "brand": "Monster",
-    "notes": "Red and blue pair",
-    "is_adapter": false
-  },
-  {
     "id": 10,
-    "end_a": { "type": "3.5mm", "subtype": "TRS", "gender": "male", "pairing": "single", "colors": null },
-    "end_b": { "type": "3.5mm", "subtype": "TRS", "gender": "male", "pairing": "single", "colors": null },
+    "end_a": {
+      "type": "3.5mm",
+      "subtype": "TRS",
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "end_b": {
+      "type": "3.5mm",
+      "subtype": "TRS",
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
     "signal_type": "stereo audio",
     "length": null,
     "length_unit": null,
@@ -131,8 +318,20 @@
   },
   {
     "id": 11,
-    "end_a": { "type": "3.5mm", "subtype": "TRS", "gender": "male", "pairing": "single", "colors": null },
-    "end_b": { "type": "3.5mm", "subtype": "TRS", "gender": "male", "pairing": "single", "colors": null },
+    "end_a": {
+      "type": "3.5mm",
+      "subtype": "TRS",
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "end_b": {
+      "type": "3.5mm",
+      "subtype": "TRS",
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
     "signal_type": "stereo audio",
     "length": null,
     "length_unit": null,
@@ -143,22 +342,21 @@
     "is_adapter": false
   },
   {
-    "id": 12,
-    "end_a": { "type": "MIDI DIN", "subtype": "5-pin", "gender": "male", "pairing": "single", "colors": null },
-    "end_b": { "type": "MIDI DIN", "subtype": "5-pin", "gender": "male", "pairing": "single", "colors": null },
-    "signal_type": "MIDI",
-    "length": null,
-    "length_unit": null,
-    "quantity": 1,
-    "condition": "unknown",
-    "brand": null,
-    "notes": null,
-    "is_adapter": false
-  },
-  {
     "id": 13,
-    "end_a": { "type": "USB-C", "subtype": null, "gender": "male", "pairing": "single", "colors": null },
-    "end_b": { "type": "MIDI DIN", "subtype": "5-pin", "gender": "male", "pairing": "pair", "colors": null },
+    "end_a": {
+      "type": "USB-C",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "end_b": {
+      "type": "MIDI DIN",
+      "subtype": "5-pin",
+      "gender": "male",
+      "pairing": "pair",
+      "colors": null
+    },
     "signal_type": "MIDI",
     "length": null,
     "length_unit": null,
@@ -167,5 +365,57 @@
     "brand": null,
     "notes": "USB MIDI interface — IN + OUT, contains active circuitry",
     "is_adapter": true
+  },
+  {
+    "id": 14,
+    "end_a": {
+      "type": "HDMI",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "end_b": {
+      "type": "HDMI",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "signal_type": "HDMI",
+    "quantity": 1,
+    "condition": "unknown",
+    "length": 3,
+    "length_unit": "ft",
+    "brand": null,
+    "cable_color": null,
+    "notes": null,
+    "is_adapter": false
+  },
+  {
+    "id": 15,
+    "end_a": {
+      "type": "HDMI",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "end_b": {
+      "type": "HDMI",
+      "subtype": null,
+      "gender": "male",
+      "pairing": "single",
+      "colors": null
+    },
+    "signal_type": "HDMI",
+    "quantity": 1,
+    "condition": "unknown",
+    "length": 3.5,
+    "length_unit": "ft",
+    "brand": null,
+    "cable_color": null,
+    "notes": null,
+    "is_adapter": false
   }
 ]

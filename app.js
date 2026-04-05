@@ -215,6 +215,7 @@ const CATEGORY_SIGNALS = {
 let cables = [];
 let editingId = null;
 let activeCategory = '';
+let dragSrcId = null;
 
 // --- Data ---
 
@@ -272,17 +273,23 @@ function connectorDisplay(end, flipped = false) {
   return `<span class="connector-display ${alignClass}"><span class="connector-icon${flipClass}">${icon}</span></span>`;
 }
 
-function cableWire(length, lengthUnit) {
+function cableWire(length, lengthUnit, color) {
   const label = length ? `${length} ${lengthUnit}` : '';
+  const jacket = COLOR_MAP[color] || '#444';
   return `<span class="cable-wire">
     ${label ? `<span class="cable-length">${label}</span>` : ''}
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 16" width="120" height="16" class="cable-wire-svg">
-      <!-- outer jacket -->
-      <rect x="0" y="5" width="120" height="6" fill="#444"/>
-      <!-- highlight stripe -->
-      <rect x="0" y="5" width="120" height="2" fill="#555"/>
+      <rect x="0" y="5" width="120" height="6" fill="${jacket}"/>
+      <rect x="0" y="5" width="120" height="2" fill="rgba(255,255,255,0.2)"/>
     </svg>
   </span>`;
+}
+
+function signalClass(signal) {
+  if (CATEGORY_SIGNALS.audio.includes(signal)) return 'signal-audio';
+  if (CATEGORY_SIGNALS.video.includes(signal)) return 'signal-video';
+  if (CATEGORY_SIGNALS.usb.includes(signal))   return 'signal-usb';
+  return '';
 }
 
 // --- Render ---
@@ -312,17 +319,20 @@ function renderList(filtered) {
     const endB = connectorDisplay(c.end_b, true);
 
     return `
-      <div class="cable-card" data-id="${c.id}">
+      <div class="cable-card" data-id="${c.id}" draggable="true"
+        ondragstart="dragStart(event,${c.id})" ondragover="dragOver(event)"
+        ondragleave="dragLeave(event)" ondrop="dragDrop(event,${c.id})"
+        ondragend="dragEnd()">
         <div class="cable-main">
           <div class="cable-diagram">
-            <div class="cable-ends">${endA}${cableWire(c.length, c.length_unit)}${endB}</div>
+            <div class="cable-ends">${endA}${cableWire(c.length, c.length_unit, c.cable_color)}${endB}</div>
             <div class="cable-labels">
               <span class="connector-name label-a">${connectorLabel(c.end_a)}</span>
               <span class="connector-name label-b">${connectorLabel(c.end_b)}</span>
             </div>
           </div>
           <div class="cable-meta">
-            <div class="cable-signal">${c.signal_type}</div>
+            <div class="cable-signal ${signalClass(c.signal_type)}">${c.signal_type}</div>
             ${c.brand ? `<div class="cable-brand">${c.brand}</div>` : ''}
             ${c.is_adapter ? '<div class="cable-adapter-badge">ADAPTER</div>' : ''}
             ${c.notes ? `<div class="cable-notes">${c.notes}</div>` : ''}
@@ -379,6 +389,7 @@ function openModal(cable = null) {
     form.length.value        = cable.length || '';
     form.length_unit.value   = cable.length_unit || '';
     form.brand.value         = cable.brand || '';
+    form.cable_color.value   = cable.cable_color || '';
     form.notes.value         = cable.notes || '';
     form.is_adapter.value    = cable.is_adapter ? 'true' : 'false';
   }
@@ -422,6 +433,7 @@ document.getElementById('cable-form').addEventListener('submit', e => {
     length:       form.length.value ? parseFloat(form.length.value) : null,
     length_unit:  form.length_unit.value || null,
     brand:        form.brand.value.trim() || null,
+    cable_color:  form.cable_color.value.trim().toLowerCase() || null,
     notes:        form.notes.value.trim() || null,
     is_adapter:   form.is_adapter.value === 'true',
   };
@@ -437,6 +449,38 @@ document.getElementById('cable-form').addEventListener('submit', e => {
   closeModal();
   render();
 });
+
+// --- Drag to reorder ---
+
+function dragStart(e, id) {
+  dragSrcId = id;
+  e.dataTransfer.effectAllowed = 'move';
+  e.currentTarget.classList.add('dragging');
+}
+
+function dragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  e.currentTarget.classList.add('drag-over');
+}
+
+function dragLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+
+function dragEnd() {
+  document.querySelectorAll('.cable-card').forEach(c => c.classList.remove('dragging', 'drag-over'));
+}
+
+function dragDrop(e, targetId) {
+  e.preventDefault();
+  if (dragSrcId === targetId) return;
+  const srcIdx = cables.findIndex(c => c.id === dragSrcId);
+  const tgtIdx = cables.findIndex(c => c.id === targetId);
+  cables.splice(tgtIdx, 0, cables.splice(srcIdx, 1)[0]);
+  save();
+  render();
+}
 
 // --- Actions ---
 
