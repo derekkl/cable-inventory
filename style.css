@@ -1,0 +1,268 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #111;
+  color: #eee;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 1.4rem;
+  letter-spacing: 4px;
+  color: #e94560;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.controls input, .controls select {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  color: #eee;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 0.85rem;
+}
+
+.controls input { width: 180px; }
+
+.controls button {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 16px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.controls button:hover { background: #c73652; }
+
+/* Stats */
+.stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.stat span { color: #eee; font-size: 1.2rem; font-weight: 600; display: block; }
+
+/* Cable list */
+.cable-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cable-card {
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.cable-card:hover { border-color: #444; }
+
+.cable-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cable-ends {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.arrow { color: #555; margin: 0 6px; }
+
+.cable-signal {
+  font-size: 0.75rem;
+  background: #2a2a2a;
+  border-radius: 4px;
+  padding: 2px 8px;
+  color: #aaa;
+  white-space: nowrap;
+}
+
+.cable-notes {
+  font-size: 0.78rem;
+  color: #666;
+}
+
+.cable-brand {
+  font-size: 0.75rem;
+  color: #e94560;
+  font-weight: 600;
+}
+
+.cable-adapter-badge {
+  font-size: 0.7rem;
+  background: #3a2a0a;
+  color: #f5a623;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.cable-qty {
+  font-size: 0.85rem;
+  color: #777;
+  white-space: nowrap;
+}
+
+.cable-condition {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.condition-good    { background: #1a3a1a; color: #7ed321; }
+.condition-worn    { background: #3a2a00; color: #f5a623; }
+.condition-dead    { background: #3a1a1a; color: #e94560; }
+.condition-unknown { background: #2a2a2a; color: #777; }
+
+.cable-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.cable-actions button {
+  background: none;
+  border: 1px solid #333;
+  color: #777;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.cable-actions button:hover { border-color: #e94560; color: #e94560; }
+
+/* Color dots */
+.color-dots { display: inline-flex; gap: 3px; vertical-align: middle; }
+.color-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.modal {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 28px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  color: #e94560;
+  font-size: 1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.form-group.wide { flex: 2; }
+
+.form-group label {
+  font-size: 0.72rem;
+  color: #777;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.form-group input, .form-group select {
+  background: #111;
+  border: 1px solid #333;
+  color: #eee;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 0.85rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+.form-actions button {
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  border: none;
+}
+
+.form-actions button[type="submit"] { background: #e94560; color: #fff; }
+.form-actions button[type="button"] { background: #2a2a2a; color: #aaa; }
+
+.empty { text-align: center; color: #555; padding: 40px; }

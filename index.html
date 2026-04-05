@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cable Inventory</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>CABLE INVENTORY</h1>
+      <div class="controls">
+        <input id="search" type="text" placeholder="Search..." />
+        <select id="filter-signal">
+          <option value="">All signal types</option>
+          <option value="stereo audio">Stereo Audio</option>
+          <option value="mono audio">Mono Audio</option>
+          <option value="balanced audio">Balanced Audio</option>
+          <option value="composite video">Composite Video</option>
+          <option value="MIDI">MIDI</option>
+        </select>
+        <button id="btn-add">+ ADD CABLE</button>
+      </div>
+    </header>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="cable-list" id="cable-list"></div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal-overlay" id="modal" style="display:none">
+    <div class="modal">
+      <h2 id="modal-title">Add Cable</h2>
+      <form id="cable-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>End A Type</label>
+            <select name="end_a_type" required>
+              <option value="">Select...</option>
+              <option value="3.5mm">3.5mm</option>
+              <option value="1/4&quot;">1/4"</option>
+              <option value="RCA">RCA</option>
+              <option value="XLR">XLR</option>
+              <option value="MIDI DIN">MIDI DIN</option>
+              <option value="USB-C">USB-C</option>
+              <option value="USB-A">USB-A</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>End A Subtype</label>
+            <select name="end_a_subtype">
+              <option value="">N/A</option>
+              <option value="TS">TS (mono)</option>
+              <option value="TRS">TRS (stereo/balanced)</option>
+              <option value="5-pin">5-pin</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>End A Gender</label>
+            <select name="end_a_gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="n/a">N/A</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>End A Pairing</label>
+            <select name="end_a_pairing">
+              <option value="single">Single</option>
+              <option value="pair">Pair</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>End A Colors</label>
+            <input type="text" name="end_a_colors" placeholder="red, white" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>End B Type</label>
+            <select name="end_b_type" required>
+              <option value="">Select...</option>
+              <option value="3.5mm">3.5mm</option>
+              <option value="1/4&quot;">1/4"</option>
+              <option value="RCA">RCA</option>
+              <option value="XLR">XLR</option>
+              <option value="MIDI DIN">MIDI DIN</option>
+              <option value="USB-C">USB-C</option>
+              <option value="USB-A">USB-A</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>End B Subtype</label>
+            <select name="end_b_subtype">
+              <option value="">N/A</option>
+              <option value="TS">TS (mono)</option>
+              <option value="TRS">TRS (stereo/balanced)</option>
+              <option value="5-pin">5-pin</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>End B Gender</label>
+            <select name="end_b_gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="n/a">N/A</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>End B Pairing</label>
+            <select name="end_b_pairing">
+              <option value="single">Single</option>
+              <option value="pair">Pair</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>End B Colors</label>
+            <input type="text" name="end_b_colors" placeholder="red, white" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Signal Type</label>
+            <select name="signal_type" required>
+              <option value="stereo audio">Stereo Audio</option>
+              <option value="mono audio">Mono Audio</option>
+              <option value="balanced audio">Balanced Audio</option>
+              <option value="composite video">Composite Video</option>
+              <option value="MIDI">MIDI</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" name="quantity" value="1" min="1" />
+          </div>
+          <div class="form-group">
+            <label>Condition</label>
+            <select name="condition">
+              <option value="unknown">Unknown</option>
+              <option value="good">Good</option>
+              <option value="worn">Worn</option>
+              <option value="dead">Dead</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Length</label>
+            <input type="number" name="length" placeholder="optional" step="0.1" />
+          </div>
+          <div class="form-group">
+            <label>Unit</label>
+            <select name="length_unit">
+              <option value="">—</option>
+              <option value="ft">ft</option>
+              <option value="m">m</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Brand</label>
+            <input type="text" name="brand" placeholder="optional" />
+          </div>
+          <div class="form-group wide">
+            <label>Notes</label>
+            <input type="text" name="notes" placeholder="optional" />
+          </div>
+          <div class="form-group">
+            <label>Adapter/Interface</label>
+            <select name="is_adapter">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit">Save</button>
+          <button type="button" id="btn-cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
