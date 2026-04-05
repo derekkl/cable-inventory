@@ -65,14 +65,12 @@ function connectorIcon(type, subtype, end = {}) {
         <circle cx="16" cy="16" r="11" fill="#333"/>
         <!-- keyway notch at top -->
         <rect x="13" y="2" width="6" height="5" rx="1" fill="#444"/>
-        <!-- pin 1 (top center) -->
-        <circle cx="16" cy="9"  r="2.5" fill="${pinFill}" stroke="${pinStroke}" stroke-width="0.5"/>
-        <!-- pin 2 (bottom left) -->
-        <circle cx="10" cy="21" r="2.5" fill="${pinFill}" stroke="${pinStroke}" stroke-width="0.5"/>
-        <!-- pin 3 (bottom right) -->
-        <circle cx="22" cy="21" r="2.5" fill="${pinFill}" stroke="${pinStroke}" stroke-width="0.5"/>
+        <!-- 3 pins/holes in top half -->
+        <circle cx="16" cy="8"  r="2.5" fill="${pinFill}" stroke="${pinStroke}" stroke-width="0.5"/>
+        <circle cx="10" cy="14" r="2.5" fill="${pinFill}" stroke="${pinStroke}" stroke-width="0.5"/>
+        <circle cx="22" cy="14" r="2.5" fill="${pinFill}" stroke="${pinStroke}" stroke-width="0.5"/>
         <!-- male/female indicator text -->
-        <text x="16" y="17" text-anchor="middle" font-size="5" fill="#888" font-family="monospace">${subtype === 'female' ? 'F' : 'M'}</text>
+        <text x="16" y="24" text-anchor="middle" font-size="5" fill="#888" font-family="monospace">${subtype === 'female' ? 'F' : 'M'}</text>
       </svg>`;
     }
     case 'MIDI DIN': {
