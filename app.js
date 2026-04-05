@@ -99,10 +99,114 @@ function connectorIcon(type, subtype, end = {}) {
     case 'USB-C': {
       const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
-        <!-- outer oval housing -->
         <rect x="4" y="9" width="24" height="14" rx="7" fill="#444" stroke="#666" stroke-width="1"/>
-        <!-- inner tongue/blade -->
         <rect x="8" y="13" width="16" height="6" rx="3" fill="#888"/>
+      </svg>`;
+    }
+    case 'USB-A': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
+      return `<svg ${f}>
+        <rect x="3" y="9" width="26" height="14" rx="2" fill="#444" stroke="#666" stroke-width="1"/>
+        <rect x="7" y="13" width="18" height="6" rx="1" fill="#888"/>
+      </svg>`;
+    }
+    case 'USB-B': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
+      return `<svg ${f}>
+        <polygon points="8,4 24,4 28,10 28,28 4,28 4,10" fill="#444" stroke="#666" stroke-width="1"/>
+        <rect x="9" y="13" width="14" height="11" rx="1" fill="#888"/>
+      </svg>`;
+    }
+    case 'USB-Mini': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
+      return `<svg ${f}>
+        <polygon points="5,8 27,8 29,10 29,24 3,24 3,10" fill="#444" stroke="#666" stroke-width="1"/>
+        <polygon points="8,12 24,12 26,14 26,21 6,21 6,14" fill="#888"/>
+      </svg>`;
+    }
+    case 'USB-Micro': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
+      return `<svg ${f}>
+        <polygon points="3,9 29,9 31,12 29,23 3,23 1,20" fill="#444" stroke="#666" stroke-width="1"/>
+        <polygon points="6,13 26,13 27,15 26,20 6,20 5,18" fill="#888"/>
+      </svg>`;
+    }
+    case 'HDMI': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
+      return `<svg ${f}>
+        <polygon points="3,7 29,7 29,23 26,26 6,26 3,23" fill="#444" stroke="#666" stroke-width="1"/>
+        <polygon points="6,11 26,11 26,20 24,22 8,22 6,20" fill="#888"/>
+      </svg>`;
+    }
+    case 'DisplayPort': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
+      return `<svg ${f}>
+        <polygon points="3,6 29,6 29,26 7,26 3,22" fill="#444" stroke="#666" stroke-width="1"/>
+        <polygon points="6,10 26,10 26,23 9,23 6,19" fill="#888"/>
+      </svg>`;
+    }
+    case 'Mini DisplayPort':
+    case 'Thunderbolt': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
+      return `<svg ${f}>
+        <polygon points="5,7 27,7 27,25 9,25 5,21" fill="#444" stroke="#666" stroke-width="1"/>
+        <polygon points="8,11 24,11 24,22 11,22 8,19" fill="#888"/>
+      </svg>`;
+    }
+    case 'VGA': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
+      return `<svg ${f}>
+        <polygon points="2,5 30,5 28,27 4,27" fill="#444" stroke="#666" stroke-width="1"/>
+        <circle cx="7"  cy="12" r="1.5" fill="#bbb"/>
+        <circle cx="12" cy="12" r="1.5" fill="#bbb"/>
+        <circle cx="16" cy="12" r="1.5" fill="#bbb"/>
+        <circle cx="20" cy="12" r="1.5" fill="#bbb"/>
+        <circle cx="25" cy="12" r="1.5" fill="#bbb"/>
+        <circle cx="7"  cy="17" r="1.5" fill="#bbb"/>
+        <circle cx="12" cy="17" r="1.5" fill="#bbb"/>
+        <circle cx="16" cy="17" r="1.5" fill="#bbb"/>
+        <circle cx="20" cy="17" r="1.5" fill="#bbb"/>
+        <circle cx="25" cy="17" r="1.5" fill="#bbb"/>
+        <circle cx="9"  cy="22" r="1.5" fill="#bbb"/>
+        <circle cx="13" cy="22" r="1.5" fill="#bbb"/>
+        <circle cx="16" cy="22" r="1.5" fill="#bbb"/>
+        <circle cx="19" cy="22" r="1.5" fill="#bbb"/>
+        <circle cx="23" cy="22" r="1.5" fill="#bbb"/>
+      </svg>`;
+    }
+    case 'DVI': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
+      return `<svg ${f}>
+        <rect x="2" y="6" width="28" height="20" rx="2" fill="#444" stroke="#666" stroke-width="1"/>
+        <!-- pin grid: 3 rows x 6 cols -->
+        <rect x="6"  y="11" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="10" y="11" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="14" y="11" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="18" y="11" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="22" y="11" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="6"  y="15" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="10" y="15" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="14" y="15" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="18" y="15" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="22" y="15" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="6"  y="19" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <rect x="10" y="19" width="2" height="2" rx="0.5" fill="#bbb"/>
+        <!-- DVI cross pin -->
+        <rect x="24" y="13" width="4" height="6" rx="1" fill="#999"/>
+      </svg>`;
+    }
+    case 'S-Video': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
+      return `<svg ${f}>
+        <circle cx="16" cy="15" r="13" fill="#444" stroke="#666" stroke-width="1"/>
+        <circle cx="16" cy="15" r="10" fill="#333"/>
+        <!-- 4 pins -->
+        <circle cx="11" cy="10" r="2" fill="#bbb"/>
+        <circle cx="21" cy="10" r="2" fill="#bbb"/>
+        <circle cx="11" cy="19" r="2" fill="#bbb"/>
+        <circle cx="21" cy="19" r="2" fill="#bbb"/>
+        <!-- center key -->
+        <circle cx="16" cy="22" r="3" fill="#555"/>
       </svg>`;
     }
     default:
@@ -113,8 +217,15 @@ function connectorIcon(type, subtype, end = {}) {
   }
 }
 
+const CATEGORY_SIGNALS = {
+  audio: ['stereo audio', 'mono audio', 'balanced audio', 'MIDI'],
+  video: ['HDMI', 'DisplayPort', 'component video', 'composite video', 'S-Video', 'VGA'],
+  usb:   ['USB data', 'USB power'],
+};
+
 let cables = [];
 let editingId = null;
+let activeCategory = '';
 
 // --- Data ---
 
@@ -249,9 +360,10 @@ function render() {
 
   const filtered = cables.filter(c => {
     const text = JSON.stringify(c).toLowerCase();
-    const matchSearch = !search || text.includes(search);
-    const matchSignal = !signal || c.signal_type === signal;
-    return matchSearch && matchSignal;
+    const matchSearch   = !search || text.includes(search);
+    const matchSignal   = !signal || c.signal_type === signal;
+    const matchCategory = !activeCategory || (CATEGORY_SIGNALS[activeCategory] || []).includes(c.signal_type);
+    return matchSearch && matchSignal && matchCategory;
   });
 
   renderStats(filtered);
@@ -357,6 +469,15 @@ function deleteCable(id) {
 }
 
 // --- Init ---
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeCategory = tab.dataset.category;
+    render();
+  });
+});
 
 document.getElementById('btn-add').addEventListener('click', () => openModal());
 document.getElementById('btn-cancel').addEventListener('click', closeModal);
