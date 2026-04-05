@@ -10,6 +10,7 @@ const COLOR_MAP = {
 
 function connectorIcon(type, subtype, end = {}) {
   const s = `xmlns="http://www.w3.org/2000/svg" viewBox="0 4 80 24" width="60" height="18"`;
+  const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
 
   switch (type) {
     case '3.5mm': {
@@ -82,7 +83,6 @@ function connectorIcon(type, subtype, end = {}) {
     }
     case 'MIDI DIN': {
       // Face-on view — fully circular housing, 5-pin horseshoe arc
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <!-- outer circular housing -->
         <circle cx="16" cy="16" r="14" fill="#444" stroke="#666" stroke-width="1"/>
@@ -97,49 +97,42 @@ function connectorIcon(type, subtype, end = {}) {
       </svg>`;
     }
     case 'USB-C': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <rect x="4" y="9" width="24" height="14" rx="7" fill="#444" stroke="#666" stroke-width="1"/>
         <rect x="8" y="13" width="16" height="6" rx="3" fill="#888"/>
       </svg>`;
     }
     case 'USB-A': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <rect x="3" y="9" width="26" height="14" rx="2" fill="#444" stroke="#666" stroke-width="1"/>
         <rect x="7" y="13" width="18" height="6" rx="1" fill="#888"/>
       </svg>`;
     }
     case 'USB-B': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <polygon points="8,4 24,4 28,10 28,28 4,28 4,10" fill="#444" stroke="#666" stroke-width="1"/>
         <rect x="9" y="13" width="14" height="11" rx="1" fill="#888"/>
       </svg>`;
     }
     case 'USB-Mini': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <polygon points="5,8 27,8 29,10 29,24 3,24 3,10" fill="#444" stroke="#666" stroke-width="1"/>
         <polygon points="8,12 24,12 26,14 26,21 6,21 6,14" fill="#888"/>
       </svg>`;
     }
     case 'USB-Micro': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <polygon points="3,9 29,9 31,12 29,23 3,23 1,20" fill="#444" stroke="#666" stroke-width="1"/>
         <polygon points="6,13 26,13 27,15 26,20 6,20 5,18" fill="#888"/>
       </svg>`;
     }
     case 'HDMI': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <polygon points="3,7 29,7 29,23 26,26 6,26 3,23" fill="#444" stroke="#666" stroke-width="1"/>
         <polygon points="6,11 26,11 26,20 24,22 8,22 6,20" fill="#888"/>
       </svg>`;
     }
     case 'DisplayPort': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <polygon points="3,6 29,6 29,26 7,26 3,22" fill="#444" stroke="#666" stroke-width="1"/>
         <polygon points="6,10 26,10 26,23 9,23 6,19" fill="#888"/>
@@ -147,14 +140,12 @@ function connectorIcon(type, subtype, end = {}) {
     }
     case 'Mini DisplayPort':
     case 'Thunderbolt': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <polygon points="5,7 27,7 27,25 9,25 5,21" fill="#444" stroke="#666" stroke-width="1"/>
         <polygon points="8,11 24,11 24,22 11,22 8,19" fill="#888"/>
       </svg>`;
     }
     case 'VGA': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <polygon points="2,5 30,5 28,27 4,27" fill="#444" stroke="#666" stroke-width="1"/>
         <circle cx="7"  cy="12" r="1.5" fill="#bbb"/>
@@ -175,7 +166,6 @@ function connectorIcon(type, subtype, end = {}) {
       </svg>`;
     }
     case 'DVI': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <rect x="2" y="6" width="28" height="20" rx="2" fill="#444" stroke="#666" stroke-width="1"/>
         <!-- pin grid: 3 rows x 6 cols -->
@@ -196,7 +186,6 @@ function connectorIcon(type, subtype, end = {}) {
       </svg>`;
     }
     case 'S-Video': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <circle cx="16" cy="15" r="13" fill="#444" stroke="#666" stroke-width="1"/>
         <circle cx="16" cy="15" r="10" fill="#333"/>
@@ -296,10 +285,6 @@ function cableWire(length, lengthUnit) {
   </span>`;
 }
 
-function conditionClass(c) {
-  return `condition-${c || 'unknown'}`;
-}
-
 // --- Render ---
 
 function renderStats(filtered) {
@@ -323,7 +308,7 @@ function renderList(filtered) {
   }
 
   el.innerHTML = filtered.map(c => {
-    const endA = connectorDisplay(c.end_a, false);
+    const endA = connectorDisplay(c.end_a);
     const endB = connectorDisplay(c.end_b, true);
 
     return `
@@ -344,7 +329,6 @@ function renderList(filtered) {
           </div>
         </div>
         <div class="cable-qty">×${c.quantity || 1}</div>
-        <div class="cable-condition ${conditionClass(c.condition)}">${c.condition || 'unknown'}</div>
         <div class="cable-actions">
           <button onclick="editCable(${c.id})">Edit</button>
           <button onclick="deleteCable(${c.id})">Delete</button>
