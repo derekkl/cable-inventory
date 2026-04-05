@@ -76,27 +76,30 @@ function connectorIcon(type, subtype, end = {}) {
       </svg>`;
     }
     case 'MIDI DIN': {
-      // Face-on (top-down) view — D-shaped housing, 5-pin horseshoe arc
+      // Face-on view — fully circular housing, 5-pin horseshoe arc
       const f = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"`;
       return `<svg ${f}>
-        <!-- outer D-shaped housing -->
-        <path d="M4 16 A12 12 0 1 1 28 16 L28 28 A2 2 0 0 1 26 30 L6 30 A2 2 0 0 1 4 28 Z" fill="#444" stroke="#666" stroke-width="1"/>
+        <!-- outer circular housing -->
+        <circle cx="16" cy="16" r="14" fill="#444" stroke="#666" stroke-width="1"/>
         <!-- inner face -->
-        <path d="M7 16 A9 9 0 1 1 25 16 L25 27 L7 27 Z" fill="#333"/>
-        <!-- 5 pins in horseshoe: top-left, top-right, mid-left, mid-right, bottom-center -->
-        <circle cx="10" cy="12" r="2" fill="#bbb"/>
-        <circle cx="22" cy="12" r="2" fill="#bbb"/>
-        <circle cx="8"  cy="19" r="2" fill="#bbb"/>
-        <circle cx="24" cy="19" r="2" fill="#bbb"/>
-        <circle cx="16" cy="10" r="2" fill="#bbb"/>
+        <circle cx="16" cy="16" r="11" fill="#333"/>
+        <!-- 5 pins in horseshoe arc (open at bottom) -->
+        <circle cx="16" cy="7"  r="2" fill="#bbb"/>
+        <circle cx="24" cy="11" r="2" fill="#bbb"/>
+        <circle cx="22" cy="22" r="2" fill="#bbb"/>
+        <circle cx="10" cy="22" r="2" fill="#bbb"/>
+        <circle cx="8"  cy="11" r="2" fill="#bbb"/>
       </svg>`;
     }
-    case 'USB-C':
-      return `<svg ${s}>
-        <rect x="20" y="8" width="56" height="16" rx="3" fill="#555"/>
-        <rect x="4" y="12" width="20" height="8" rx="4" fill="#aaa"/>
-        <rect x="22" y="10" width="4" height="12" fill="#444"/>
+    case 'USB-C': {
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"`;
+      return `<svg ${f}>
+        <!-- outer oval housing -->
+        <rect x="4" y="9" width="24" height="14" rx="7" fill="#444" stroke="#666" stroke-width="1"/>
+        <!-- inner tongue/blade -->
+        <rect x="8" y="13" width="16" height="6" rx="3" fill="#888"/>
       </svg>`;
+    }
     default:
       return `<svg ${s}>
         <rect x="10" y="10" width="60" height="12" rx="4" fill="#555"/>
