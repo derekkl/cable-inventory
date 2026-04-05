@@ -8,22 +8,22 @@ function connectorIcon(type, subtype, end = {}) {
   switch (type) {
     case '3.5mm': {
       const rings = subtype === 'TRS'
-        ? `<rect x="22" y="13" width="5" height="6" fill="#111"/><rect x="39" y="13" width="5" height="6" fill="#111"/>`
-        : `<rect x="30" y="13" width="5" height="6" fill="#111"/>`;
+        ? `<rect x="20" y="13" width="5" height="6" fill="#111"/><rect x="33" y="13" width="5" height="6" fill="#111"/>`
+        : `<rect x="26" y="13" width="5" height="6" fill="#111"/>`;
       return `<svg ${s}>
-        <rect x="50" y="7" width="27" height="18" rx="5" fill="#555"/>
-        <rect x="5" y="13" width="48" height="6" fill="#aaa"/>
+        <rect x="42" y="5" width="34" height="22" rx="6" fill="#555"/>
+        <rect x="5" y="13" width="40" height="6" fill="#aaa"/>
         ${rings}
         <ellipse cx="5" cy="16" rx="4" ry="3" fill="#bbb"/>
       </svg>`;
     }
     case '1/4"': {
       const rings = subtype === 'TRS'
-        ? `<rect x="20" y="11" width="5" height="10" fill="#111"/><rect x="37" y="11" width="5" height="10" fill="#111"/>`
-        : `<rect x="28" y="11" width="5" height="10" fill="#111"/>`;
+        ? `<rect x="18" y="11" width="5" height="10" fill="#111"/><rect x="31" y="11" width="5" height="10" fill="#111"/>`
+        : `<rect x="24" y="11" width="5" height="10" fill="#111"/>`;
       return `<svg ${s}>
-        <rect x="48" y="5" width="29" height="22" rx="5" fill="#555"/>
-        <rect x="5" y="11" width="46" height="10" fill="#aaa"/>
+        <rect x="40" y="4" width="36" height="24" rx="6" fill="#555"/>
+        <rect x="5" y="11" width="38" height="10" fill="#aaa"/>
         ${rings}
         <ellipse cx="5" cy="16" rx="4" ry="5" fill="#bbb"/>
       </svg>`;
@@ -36,10 +36,10 @@ function connectorIcon(type, subtype, end = {}) {
         const rcaPlug = (y, color) => {
           const fill = COLOR_MAP[color] || '#888';
           return `
-            <rect x="30" y="${y+4}" width="46" height="16" rx="4" fill="${fill}" opacity="0.85"/>
-            <rect x="22" y="${y+7}" width="12" height="10" rx="2" fill="#777"/>
-            <rect x="4"  y="${y+11}" width="34" height="2" fill="#bbb"/>
-            <circle cx="4" cy="${y+12}" r="2.5" fill="#ccc"/>`;
+            <rect x="28" y="${y+3}" width="48" height="22" rx="5" fill="${fill}" opacity="0.85"/>
+            <rect x="18" y="${y+7}" width="14" height="14" rx="3" fill="#777"/>
+            <rect x="4"  y="${y+11}" width="24" height="6" fill="#bbb"/>
+            <circle cx="4" cy="${y+14}" r="4" fill="#ccc"/>`;
         };
         return `<svg ${p}>
           ${rcaPlug(0,  colors[0] || 'grey')}
@@ -49,10 +49,10 @@ function connectorIcon(type, subtype, end = {}) {
       // Single RCA
       const fill = COLOR_MAP[colors[0]] || '#888';
       return `<svg ${s}>
-        <rect x="30" y="8" width="46" height="16" rx="4" fill="${fill}" opacity="0.85"/>
-        <rect x="22" y="11" width="12" height="10" rx="2" fill="#777"/>
-        <rect x="4" y="15" width="34" height="2" fill="#bbb"/>
-        <circle cx="4" cy="16" r="2.5" fill="#ccc"/>
+        <rect x="28" y="5" width="48" height="22" rx="5" fill="${fill}" opacity="0.85"/>
+        <rect x="18" y="9" width="14" height="14" rx="3" fill="#777"/>
+        <rect x="4" y="13" width="24" height="6" fill="#bbb"/>
+        <circle cx="4" cy="16" r="4" fill="#ccc"/>
       </svg>`;
     }
     case 'XLR': {
