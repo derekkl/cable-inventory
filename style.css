@@ -59,6 +59,14 @@ h1 {
 }
 
 .controls button:hover { background: #c73652; }
+.controls button#btn-import,
+.controls button#btn-export {
+  background: #1e1e1e;
+  border: 1px solid #444;
+  color: #aaa;
+}
+.controls button#btn-import:hover,
+.controls button#btn-export:hover { background: #2a2a2a; color: #eee; border-color: #666; }
 
 /* Stats */
 .stats {

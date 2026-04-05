@@ -11,19 +11,36 @@ let editingId = null;
 
 // --- Data ---
 
-async function loadCables() {
+function loadCables() {
   const stored = localStorage.getItem('cables');
-  if (stored) {
-    cables = JSON.parse(stored);
-  } else {
-    const res = await fetch('data/cables.json');
-    cables = await res.json();
-    save();
-  }
+  if (stored) cables = JSON.parse(stored);
 }
 
 function save() {
   localStorage.setItem('cables', JSON.stringify(cables));
+}
+
+function importFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      cables = JSON.parse(e.target.result);
+      save();
+      render();
+    } catch {
+      alert('Invalid JSON file.');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function exportFile() {
+  const blob = new Blob([JSON.stringify(cables, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'cables.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
 }
 
 function nextId() {
@@ -219,4 +236,14 @@ document.getElementById('btn-cancel').addEventListener('click', closeModal);
 document.getElementById('search').addEventListener('input', render);
 document.getElementById('filter-signal').addEventListener('change', render);
 
-loadCables().then(render);
+document.getElementById('btn-import').addEventListener('click', () => {
+  document.getElementById('file-input').click();
+});
+document.getElementById('file-input').addEventListener('change', e => {
+  if (e.target.files[0]) importFile(e.target.files[0]);
+  e.target.value = '';
+});
+document.getElementById('btn-export').addEventListener('click', exportFile);
+
+loadCables();
+render();
