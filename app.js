@@ -38,8 +38,7 @@ function connectorIcon(type, subtype, end = {}) {
           return `
             <rect x="28" y="${y+3}" width="48" height="22" rx="5" fill="${fill}" opacity="0.85"/>
             <rect x="18" y="${y+7}" width="14" height="14" rx="3" fill="#777"/>
-            <rect x="4"  y="${y+11}" width="24" height="6" fill="#bbb"/>
-            <circle cx="4" cy="${y+14}" r="4" fill="#ccc"/>`;
+            <rect x="4"  y="${y+11}" width="24" height="6" rx="3" fill="#bbb"/>`;
         };
         return `<svg ${p}>
           ${rcaPlug(0,  colors[0] || 'grey')}
@@ -51,8 +50,7 @@ function connectorIcon(type, subtype, end = {}) {
       return `<svg ${s}>
         <rect x="28" y="5" width="48" height="22" rx="5" fill="${fill}" opacity="0.85"/>
         <rect x="18" y="9" width="14" height="14" rx="3" fill="#777"/>
-        <rect x="4" y="13" width="24" height="6" fill="#bbb"/>
-        <circle cx="4" cy="16" r="4" fill="#ccc"/>
+        <rect x="4" y="13" width="24" height="6" rx="3" fill="#bbb"/>
       </svg>`;
     }
     case 'XLR': {
