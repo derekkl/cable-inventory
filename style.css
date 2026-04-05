@@ -109,17 +109,53 @@ h1 {
 
 .cable-main {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cable-diagram {
+  display: inline-flex;
+  flex-direction: column;
 }
 
 .cable-ends {
-  font-size: 0.95rem;
-  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.arrow { color: #555; margin: 0 6px; }
+.cable-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3px;
+}
+
+.cable-wire {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  gap: 2px;
+}
+
+.cable-length {
+  font-size: 0.65rem;
+  color: #777;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.cable-wire-svg {
+  display: block;
+}
+
+.cable-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
 
 .cable-signal {
   font-size: 0.75rem;
@@ -186,22 +222,26 @@ h1 {
 
 /* Connector display */
 .connector-display {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  vertical-align: middle;
+  align-self: center;
 }
 
+.connector-display.align-right  { align-items: flex-end; }
+.connector-display.align-left   { align-items: flex-start; }
+
 .connector-icon {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 4px;
 }
 
 .connector-icon svg {
   display: block;
   opacity: 0.9;
+}
+
+.connector-icon.flipped svg {
+  transform: scaleX(-1);
 }
 
 .connector-name {
@@ -211,14 +251,6 @@ h1 {
   letter-spacing: 0.5px;
 }
 
-/* Color dots */
-.color-dots { display: inline-flex; gap: 3px; vertical-align: middle; }
-.color-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  display: inline-block;
-  border: 1px solid rgba(255,255,255,0.15);
-}
 
 /* Modal */
 .modal-overlay {

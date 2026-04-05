@@ -1,17 +1,24 @@
 'use strict';
 
+const COLOR_MAP = {
+  red: '#e94560', white: '#f0f0f0', black: '#444', blue: '#4a90e2',
+  green: '#7ed321', yellow: '#f8e71c', grey: '#888', gray: '#888',
+  orange: '#f5a623',
+};
+
 // --- Connector Icons (side profile SVGs) ---
 
 function connectorIcon(type, subtype, end = {}) {
-  const s = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 32" width="60" height="24"`;
+  const s = `xmlns="http://www.w3.org/2000/svg" viewBox="0 4 80 24" width="60" height="18"`;
 
   switch (type) {
     case '3.5mm': {
       const rings = subtype === 'TRS'
         ? `<rect x="20" y="13" width="5" height="6" fill="#111"/><rect x="33" y="13" width="5" height="6" fill="#111"/>`
         : `<rect x="26" y="13" width="5" height="6" fill="#111"/>`;
+      const gripColor = COLOR_MAP[(end.colors || [])[0]] || '#555';
       return `<svg ${s}>
-        <rect x="42" y="5" width="34" height="22" rx="6" fill="#555"/>
+        <path d="M 48,5 L 70,5 L 80,12 L 80,20 L 70,27 L 48,27 Q 42,27 42,21 L 42,11 Q 42,5 48,5 Z" fill="${gripColor}" opacity="0.85"/>
         <rect x="5" y="13" width="40" height="6" fill="#aaa"/>
         ${rings}
         <ellipse cx="5" cy="16" rx="4" ry="3" fill="#bbb"/>
@@ -22,7 +29,7 @@ function connectorIcon(type, subtype, end = {}) {
         ? `<rect x="18" y="11" width="5" height="10" fill="#111"/><rect x="31" y="11" width="5" height="10" fill="#111"/>`
         : `<rect x="24" y="11" width="5" height="10" fill="#111"/>`;
       return `<svg ${s}>
-        <rect x="40" y="4" width="36" height="24" rx="6" fill="#555"/>
+        <path d="M 46,4 L 70,4 L 80,12 L 80,20 L 70,28 L 46,28 Q 40,28 40,22 L 40,10 Q 40,4 46,4 Z" fill="#555"/>
         <rect x="5" y="11" width="38" height="10" fill="#aaa"/>
         ${rings}
         <ellipse cx="5" cy="16" rx="4" ry="5" fill="#bbb"/>
@@ -32,11 +39,11 @@ function connectorIcon(type, subtype, end = {}) {
       const colors = end.colors || ['grey'];
       if (end.pairing === 'pair') {
         // Stacked pair — two RCA plugs, each colored
-        const p = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 64" width="60" height="48"`;
+        const p = `xmlns="http://www.w3.org/2000/svg" viewBox="0 3 80 58" width="60" height="44"`;
         const rcaPlug = (y, color) => {
           const fill = COLOR_MAP[color] || '#888';
           return `
-            <rect x="28" y="${y+3}" width="48" height="22" rx="5" fill="${fill}" opacity="0.85"/>
+            <path d="M 33,${y+3} L 70,${y+3} L 80,${y+10} L 80,${y+18} L 70,${y+25} L 33,${y+25} Q 28,${y+25} 28,${y+20} L 28,${y+8} Q 28,${y+3} 33,${y+3} Z" fill="${fill}" opacity="0.85"/>
             <rect x="18" y="${y+7}" width="14" height="14" rx="3" fill="#777"/>
             <rect x="4"  y="${y+11}" width="24" height="6" rx="3" fill="#bbb"/>`;
         };
@@ -48,14 +55,14 @@ function connectorIcon(type, subtype, end = {}) {
       // Single RCA
       const fill = COLOR_MAP[colors[0]] || '#888';
       return `<svg ${s}>
-        <rect x="28" y="5" width="48" height="22" rx="5" fill="${fill}" opacity="0.85"/>
+        <path d="M 33,5 L 70,5 L 80,12 L 80,20 L 70,27 L 33,27 Q 28,27 28,22 L 28,10 Q 28,5 33,5 Z" fill="${fill}" opacity="0.85"/>
         <rect x="18" y="9" width="14" height="14" rx="3" fill="#777"/>
         <rect x="4" y="13" width="24" height="6" rx="3" fill="#bbb"/>
       </svg>`;
     }
     case 'XLR': {
       // Face-on (top-down) view — circular shell, keyway, 3-pin triangle
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"`;
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       const pinFill = subtype === 'female' ? '#111' : '#bbb';
       const pinStroke = subtype === 'female' ? '#555' : 'none';
       return `<svg ${f}>
@@ -75,7 +82,7 @@ function connectorIcon(type, subtype, end = {}) {
     }
     case 'MIDI DIN': {
       // Face-on view — fully circular housing, 5-pin horseshoe arc
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"`;
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <!-- outer circular housing -->
         <circle cx="16" cy="16" r="14" fill="#444" stroke="#666" stroke-width="1"/>
@@ -90,7 +97,7 @@ function connectorIcon(type, subtype, end = {}) {
       </svg>`;
     }
     case 'USB-C': {
-      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"`;
+      const f = `xmlns="http://www.w3.org/2000/svg" viewBox="1 1 30 30" width="26" height="26"`;
       return `<svg ${f}>
         <!-- outer oval housing -->
         <rect x="4" y="9" width="24" height="14" rx="7" fill="#444" stroke="#666" stroke-width="1"/>
@@ -105,12 +112,6 @@ function connectorIcon(type, subtype, end = {}) {
       </svg>`;
   }
 }
-
-const COLOR_MAP = {
-  red: '#e94560', white: '#f0f0f0', black: '#444', blue: '#4a90e2',
-  green: '#7ed321', yellow: '#f8e71c', grey: '#888', gray: '#888',
-  orange: '#f5a623',
-};
 
 let cables = [];
 let editingId = null;
@@ -163,18 +164,25 @@ function connectorLabel(end) {
   return label;
 }
 
-function connectorDisplay(end) {
+function connectorDisplay(end, flipped = false) {
   const iconSubtype = end.type === 'XLR' ? end.gender : end.subtype;
   const icon = connectorIcon(end.type, iconSubtype, end);
-  const label = connectorLabel(end);
-  return `<span class="connector-display"><span class="connector-icon">${icon}${colorDots(end.colors)}</span><span class="connector-name">${label}</span></span>`;
+  const flipClass = flipped ? ' flipped' : '';
+  const alignClass = flipped ? 'align-left' : 'align-right';
+  return `<span class="connector-display ${alignClass}"><span class="connector-icon${flipClass}">${icon}</span></span>`;
 }
 
-function colorDots(colors) {
-  if (!colors || colors.length === 0) return '';
-  return `<span class="color-dots">${colors.map(c =>
-    `<span class="color-dot" style="background:${COLOR_MAP[c] || '#888'}" title="${c}"></span>`
-  ).join('')}</span>`;
+function cableWire(length, lengthUnit) {
+  const label = length ? `${length} ${lengthUnit}` : '';
+  return `<span class="cable-wire">
+    ${label ? `<span class="cable-length">${label}</span>` : ''}
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 16" width="120" height="16" class="cable-wire-svg">
+      <!-- outer jacket -->
+      <rect x="0" y="5" width="120" height="6" fill="#444"/>
+      <!-- highlight stripe -->
+      <rect x="0" y="5" width="120" height="2" fill="#555"/>
+    </svg>
+  </span>`;
 }
 
 function conditionClass(c) {
@@ -204,19 +212,25 @@ function renderList(filtered) {
   }
 
   el.innerHTML = filtered.map(c => {
-    const endA = connectorDisplay(c.end_a);
-    const endB = connectorDisplay(c.end_b);
-    const length = c.length ? `${c.length} ${c.length_unit}` : '';
+    const endA = connectorDisplay(c.end_a, false);
+    const endB = connectorDisplay(c.end_b, true);
 
     return `
       <div class="cable-card" data-id="${c.id}">
         <div class="cable-main">
-          <div class="cable-ends">${endA}<span class="arrow">→</span>${endB}</div>
-          <div class="cable-signal">${c.signal_type}</div>
-          ${c.brand ? `<div class="cable-brand">${c.brand}</div>` : ''}
-          ${c.is_adapter ? '<div class="cable-adapter-badge">ADAPTER</div>' : ''}
-          ${c.notes ? `<div class="cable-notes">${c.notes}</div>` : ''}
-          ${length ? `<div class="cable-notes">${length}</div>` : ''}
+          <div class="cable-diagram">
+            <div class="cable-ends">${endA}${cableWire(c.length, c.length_unit)}${endB}</div>
+            <div class="cable-labels">
+              <span class="connector-name label-a">${connectorLabel(c.end_a)}</span>
+              <span class="connector-name label-b">${connectorLabel(c.end_b)}</span>
+            </div>
+          </div>
+          <div class="cable-meta">
+            <div class="cable-signal">${c.signal_type}</div>
+            ${c.brand ? `<div class="cable-brand">${c.brand}</div>` : ''}
+            ${c.is_adapter ? '<div class="cable-adapter-badge">ADAPTER</div>' : ''}
+            ${c.notes ? `<div class="cable-notes">${c.notes}</div>` : ''}
+          </div>
         </div>
         <div class="cable-qty">×${c.quantity || 1}</div>
         <div class="cable-condition ${conditionClass(c.condition)}">${c.condition || 'unknown'}</div>
