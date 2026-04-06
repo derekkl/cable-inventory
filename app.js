@@ -208,7 +208,7 @@ function connectorIcon(type, subtype, end = {}) {
 const CATEGORY_SIGNALS = {
   audio: ['stereo audio', 'mono audio', 'balanced audio', 'MIDI'],
   video: ['HDMI', 'DisplayPort', 'component video', 'composite video', 'S-Video', 'VGA'],
-  usb:   ['USB data', 'USB power'],
+  usb:   ['USB'],
 };
 
 // Connector types that use a subtype selector
@@ -226,17 +226,18 @@ const CONNECTOR_TO_SIGNAL = {
   'Mini DisplayPort': 'DisplayPort',
   'VGA':              'VGA',
   'S-Video':          'S-Video',
-  'USB-A':            'USB data',
-  'USB-B':            'USB data',
-  'USB-Mini':         'USB data',
-  'USB-Micro':        'USB data',
+  'USB-A':            'USB',
+  'USB-B':            'USB',
+  'USB-Mini':         'USB',
+  'USB-Micro':        'USB',
+  'USB-C':            'USB',
 };
 
 function inferSignal(typeA, typeB) {
   const sigA = CONNECTOR_TO_SIGNAL[typeA];
   const sigB = CONNECTOR_TO_SIGNAL[typeB];
-  if (!sigA || !sigB || sigA !== sigB) return null;
-  return sigA;
+  if (sigA && sigB) return sigA === sigB ? sigA : null;
+  return sigA || sigB || null;
 }
 
 let cables = [];
